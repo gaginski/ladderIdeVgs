@@ -6,7 +6,6 @@
 package controle;
 
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -25,30 +24,31 @@ import org.json.simple.parser.ParseException;
  * @author Vitor
  */
 public class ControleProgramacao {
+
     Programacao prog = new Programacao();
     ControleArquivo controleArquivo = new ControleArquivo();
     String stringComandos = "";
-    
-    
-    public String organizaComandosExibicao(int linhas, int colunas, JLabel[] lComandos, JLabel[][] lLinhas ) throws JSONException, IOException, UnknownHostException, FileNotFoundException, ParseException{
-        
-    organizaComandosEnvio(linhas, colunas, lComandos, lLinhas);
-    
-    
-    return stringComandos;
+
+    public String organizaComandosExibicao(int linhas, int colunas, JLabel[] lComandos, JLabel[][] lLinhas) throws JSONException, IOException, UnknownHostException, FileNotFoundException, ParseException {
+
+        organizaComandosEnvio(linhas, colunas, lComandos, lLinhas);
+
+        return stringComandos;
     }
-    
-    public Programacao organizaComandosEnvio(int linhas, int colunas, JLabel[] lComandos, JLabel[][] lLinhas ) throws JSONException, IOException, UnknownHostException, FileNotFoundException, ParseException{
+
+    public Programacao organizaComandosEnvio(int linhas, int colunas, JLabel[] lComandos, JLabel[][] lLinhas) throws JSONException, IOException, UnknownHostException, FileNotFoundException, ParseException {
         // declara variveis 
         int[][][] matrizComandos = new int[linhas][colunas][5];
         JSONObject jsonEntrada = new JSONObject();
         JSONObject jsonSaida = new JSONObject();
         JSONObject jsonAux = new JSONObject();
         JSONObject jsonComandos = new JSONObject();
-        
+        String entradas = "";
+        String saidas = "";
+
         // captura status no objeto prog
         prog.status = iniciaProg();
-        
+
         //percorre todos as labels comparando o icone com os comandos, salvando na matriz os as informações de comandos setados
         for (int i = 0; i < linhas; i++) {
             for (int c = 0; c < colunas; c++) {
@@ -64,14 +64,16 @@ public class ControleProgramacao {
                 }
             }
         }
-        
+
         // percorre toda a matriz int  preenchida, gerando o json
         for (int i = 0; i < linhas; i++) {
             int contE = 0;
             int contS = 0;
+            stringComandos = stringComandos + ("Linha_" + i + ": {");
+            entradas = "\n   Entrada{ ";
+            saidas = "\n   Saídas{ ";
             for (int c = 0; c < colunas; c++) {
                 if (matrizComandos[i][c][0] == 1) {
-
 
                     switch (matrizComandos[i][c][3]) {
                         case (0):
@@ -79,10 +81,8 @@ public class ControleProgramacao {
                         case (2):
                         case (3):
                             jsonEntrada.put("Cm" + contE, matrizComandos[i][c][3] + ", " + matrizComandos[i][c][4]);
-                            stringComandos = stringComandos + "Entrada{ Codigo Comando:"+matrizComandos[i][c][3]
-                                                            +", Linha:"+matrizComandos[i][c][1]
-                                                            +", Coluna: "+matrizComandos[i][c][2]
-                                                            +", Porta:"+matrizComandos[i][c][4]+"\n";
+                            entradas = entradas + "\n       Comando:" + matrizComandos[i][c][3]
+                                    + ", Porta:" + matrizComandos[i][c][4];
                             contE++;
                             break;
                         case (4):
@@ -90,10 +90,8 @@ public class ControleProgramacao {
                         case (6):
                         case (7):
                             jsonSaida.put("Cm" + contS, matrizComandos[i][c][3] + ", " + matrizComandos[i][c][4]);
-                             stringComandos = stringComandos + "Saida{ Codigo Comando:"+matrizComandos[i][c][3]
-                                                            +", Linha:"+matrizComandos[i][c][1]
-                                                            +", Coluna: "+matrizComandos[i][c][2]
-                                                            +", Porta:"+matrizComandos[i][c][4]+"\n";
+                            saidas = saidas + "\n       Comando:" + matrizComandos[i][c][3]
+                                    + ", Porta:" + matrizComandos[i][c][4];
                             contS++;
                             break;
                         default:
@@ -103,6 +101,9 @@ public class ControleProgramacao {
 
                 }
             }
+            entradas = entradas + "}";
+            saidas = saidas + "}";
+            stringComandos = stringComandos + entradas + saidas + "\n   }\n";
             jsonAux.put("In", jsonEntrada);
             jsonAux.put("Out", jsonSaida);
             jsonComandos.put("Ln" + i, jsonAux);
@@ -111,29 +112,52 @@ public class ControleProgramacao {
             jsonSaida = new JSONObject();
 
         }
-        
-        
-               
+
         prog.parametros = jsonComandos;
-        
-        
+        //System.out.println(jsonComandos);
+        organizaPacotes(prog);
+
         return prog;
     }
-    private JSONObject iniciaProg() throws JSONException, UnknownHostException, IOException, FileNotFoundException, ParseException{
+
+    public Programacao organizaPacotes(Programacao p) {
+
+        String aux = null;
+        int cont, tamanhoVetor = p.parametros.toString().length();
+
+        aux = p.parametros.toString();
+
+        cont = (int) Math.floor(tamanhoVetor / 220) + 1;
+        
+        String[] pacotes = new String[cont];
+        
+        for (int i = 0; i < cont; i++) {
+            if (i == cont - 1) {
+                pacotes[i] = aux.substring(i * 220, aux.length());
+            } else {
+                pacotes[i] = aux.substring(i * 220, (i * 220) + 220);
+            }
+        }
+        
+        p.pacotes = pacotes;
+        
+        return p;
+    }
+
+    private JSONObject iniciaProg() throws JSONException, UnknownHostException, IOException, FileNotFoundException, ParseException {
         JSONObject status = new JSONObject();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
-	Date date = new Date(); 
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
         config c = new config();
         c = controleArquivo.configuracao();
-       
-        
+
         status.put("DataHoraCarregamento", dateFormat.format(date));
         status.put("Pc_Carregou", InetAddress.getLocalHost().getHostName());
         status.put("IP_carregou", InetAddress.getLocalHost().getAddress());
         status.put("Porta", c.porta);
-        
+
         return status;
-        
+
     }
-    
+
 }

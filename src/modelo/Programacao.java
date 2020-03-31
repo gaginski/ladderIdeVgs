@@ -15,17 +15,28 @@ public class Programacao {
 
     public JSONObject status;
     public JSONObject parametros;
+    public String[] pacotes;
      
-    public Programacao(JSONObject status, JSONObject parametros) {
+    public Programacao(JSONObject status, JSONObject parametros, String[] pacotes) {
         this.status = status;
         this.parametros = parametros;
+        this.pacotes = pacotes;
 
     }
 
     public Programacao() {
         this.status = null;
         this.parametros = null;
+        this.pacotes = null;
 
+    }
+
+    public void setPacotes(String[] pacotes) {
+        this.pacotes = pacotes;
+    }
+
+    public String[] getPacotes() {
+        return pacotes;
     }
 
     public JSONObject getStatus() {

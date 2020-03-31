@@ -28,8 +28,6 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     /**
      * Creates new form principal
      */
-    
-            
     int qntdLinhas = 6;
     int qntdColunas = 9;
     int qntdComandos = 5;
@@ -74,7 +72,6 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblContatoP = new javax.swing.JLabel();
         lblContatoNF = new javax.swing.JLabel();
-        lblSaidaNA = new javax.swing.JLabel();
         lblContatoN = new javax.swing.JLabel();
         lblSaidaNF = new javax.swing.JLabel();
         lblSaidaP = new javax.swing.JLabel();
@@ -141,6 +138,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         lbLocal3_2 = new javax.swing.JLabel();
         lbLocal3_3 = new javax.swing.JLabel();
         lbLocal3_4 = new javax.swing.JLabel();
+        lblSaidaNA = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -259,16 +257,6 @@ public class FrmEditorComandos extends javax.swing.JFrame {
             }
         });
 
-        lblSaidaNA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/saidaNA.png"))); // NOI18N
-        lblSaidaNA.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblSaidaNAMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblSaidaNAMousePressed(evt);
-            }
-        });
-
         lblContatoN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/contatoN.png"))); // NOI18N
         lblContatoN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -342,28 +330,34 @@ public class FrmEditorComandos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 393, Short.MAX_VALUE)
                         .addComponent(cbxAtivarSaida)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLimparSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(jButton1))
-                    .addComponent(jScrollPane2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLimparSaida)
-                    .addComponent(jButton1)
-                    .addComponent(cbxAtivarSaida))
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(cbxAtivarSaida))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnLimparSaida)
+                            .addComponent(jButton1))))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Comandos Ladder"));
+        jPanel2.setToolTipText("");
 
         lbLocal3_5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal3_5.setText("3");
@@ -919,6 +913,16 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         lbLocal3_3.getAccessibleContext().setAccessibleParent(this);
         lbLocal3_4.getAccessibleContext().setAccessibleParent(this);
 
+        lblSaidaNA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/saidaNA.png"))); // NOI18N
+        lblSaidaNA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSaidaNAMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSaidaNAMousePressed(evt);
+            }
+        });
+
         jMenu1.setText("Arquivos");
         jMenuBar1.add(jMenu1);
 
@@ -937,37 +941,42 @@ public class FrmEditorComandos extends javax.swing.JFrame {
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblContatoNA)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblContatoNF)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblContatoP)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblContatoN))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblSaidaNA)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblSaidaNF)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblSaidaP)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblSaidaN))
-                            .addComponent(jSeparator1)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(539, Short.MAX_VALUE))
+                        .addComponent(lblContatoNA)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblContatoNF)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblContatoP)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblContatoN))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblSaidaNA)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblSaidaNF)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblSaidaP)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblSaidaN))
+                    .addComponent(jSeparator1))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -985,15 +994,9 @@ public class FrmEditorComandos extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblSaidaNF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblSaidaNA, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblSaidaP, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 522, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                                    .addComponent(lblSaidaP, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblSaidaNA, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -1210,8 +1213,8 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ControleProgramacao cProg = new ControleProgramacao();
         try {
-            ptxtSaida.setText(ptxtSaida.getText()+"--------------------------------------------------------------------------------------\n");
-            ptxtSaida.setText(ptxtSaida.getText()+cProg.organizaComandosExibicao(qntdLinhas, qntdColunas, labelContatos, lineMatriz));
+            ptxtSaida.setText(ptxtSaida.getText() + "--------------------------------------------- ATUALIZANDO --------------------------------------------- \n");
+            ptxtSaida.setText(ptxtSaida.getText() + cProg.organizaComandosExibicao(qntdLinhas, qntdColunas, labelContatos, lineMatriz));
 
         } catch (IOException | ParseException | JSONException ex) {
             Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
@@ -1277,13 +1280,13 @@ public class FrmEditorComandos extends javax.swing.JFrame {
                 th.exportAsDrag(jc, e, TransferHandler.COPY);
 
                 if (cbxAtivarSaida.isSelected()) {
-                    /*try {
-                        organizaComandos();
-                    } catch (JSONException ex) {
+                    ControleProgramacao cProg = new ControleProgramacao();
+                    try {
+                        ptxtSaida.setText(ptxtSaida.getText() + "--------------------------------------------- ATUALIZANDO --------------------------------------------- \n");
+                        ptxtSaida.setText(ptxtSaida.getText() + cProg.organizaComandosExibicao(qntdLinhas, qntdColunas, labelContatos, lineMatriz));
+                    } catch (IOException | ParseException | JSONException ex) {
                         Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                        Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
-                    }*/
+                    }
                 }
             }
 
