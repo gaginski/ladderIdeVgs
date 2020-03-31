@@ -8,7 +8,6 @@ package visao;
 import controle.ControleArquivo;
 import controle.ControleComunicacao;
 import java.awt.event.KeyEvent;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,7 +51,6 @@ public class frmSelecionaPortas extends javax.swing.JFrame {
         for (int i = 0; i < 11; i++) {
             cbmPortas.addItem(portas[i]);
         }
-
     }
 
     /**

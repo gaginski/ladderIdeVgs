@@ -5,6 +5,7 @@
  */
 package visao;
 
+import controle.ControleComunicacao;
 import controle.ControleProgramacao;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.TransferHandler;
 import modelo.Programacao;
 import org.json.JSONException;
@@ -1048,14 +1050,30 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     }//GEN-LAST:event_lblContatoNMousePressed
 
     private void btnCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarActionPerformed
-        ControleProgramacao cProg = new ControleProgramacao();
+        ControleComunicacao envia = new ControleComunicacao();
 
         try {
-            prog = cProg.organizaComandosEnvio(qntdLinhas, qntdColunas, labelContatos, lineMatriz);
+            int c = envia.enviaProg(qntdLinhas, qntdColunas, labelContatos, lineMatriz);
+            switch (c) {
+                case 1:
+                    JOptionPane.showMessageDialog(null, "Enviado Corretamente!", "Envio", JOptionPane.WARNING_MESSAGE);
+                    break;
+                case 0:
+                    JOptionPane.showMessageDialog(null, "Erro ao Enviar!", "Envio", JOptionPane.WARNING_MESSAGE);
+                    break;
+                default:
+                    break;
+            }
 
-        } catch (IOException | ParseException | JSONException ex) {
+        } catch (IOException ex) {
+            Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JSONException ex) {
             Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
     }//GEN-LAST:event_btnCarregarActionPerformed
 
     private void lblSaidaNFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSaidaNFMouseClicked

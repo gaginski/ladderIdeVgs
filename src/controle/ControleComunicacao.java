@@ -6,8 +6,16 @@
 package controle;
 
 import br.pro.turing.javino.Javino;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import modelo.Programacao;
+import modelo.config;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.simple.parser.ParseException;
+import visao.frmSelecionaPortas;
 
 /**
  *
@@ -27,41 +35,35 @@ public class ControleComunicacao {
         return confirmacao;
     }
 
-    public boolean enviaProg(String porta, Programacao prog) {
-        boolean confirmacao = false;
-        boolean envioStatus = false;
-        boolean envioProg = false;
+    public int enviaProg(int linhas, int colunas, JLabel[] lComandos, JLabel[][] lLinhas) throws IOException, FileNotFoundException, ParseException, JSONException {
+        int confirma = 0;
+        ControleArquivo arquivo = new ControleArquivo();
+        config conf;
 
-        
-        confirmacao = confirmaConexao(porta);
+        conf = arquivo.configuracao();
 
-        if (confirmacao) {
-
-            // Envia Status    
-            envioStatus = comunica.sendCommand(porta, prog.getStatus().toString());
-
-            // Envia Prog
-            comunica.sendCommand(porta, prog.getParametros().toString());
-        }
-        confirmacao = false;
-        if (envioProg && envioStatus) {
-            confirmacao = true;
+        if (conf.porta == null) {
+            JOptionPane.showMessageDialog(null, "Não há porta selecionada.\n Verifique a configuração de portas.");
+            confirma = 3;
+        } else {
+            confirma = 1;
         }
 
-        return confirmacao;
+        return confirma;
+
     }
 
-public int varreSaidas(String[] portas){
-int porta = -1;
-boolean confirma = false;
+    public int varreSaidas(String[] portas) {
+        int porta = -1;
+        boolean confirma = false;
 
-  for(int i = 0; i<portas.length; i++){
-        confirma = comunica.sendCommand(portas[i], "testePorta");
-        if(confirma){
-            porta = i;
+        for (int i = 0; i < portas.length; i++) {
+            confirma = comunica.sendCommand(portas[i], "testePorta");
+            if (confirma) {
+                porta = i;
+            }
         }
-  }
 
-return porta;
-}
+        return porta;
+    }
 }

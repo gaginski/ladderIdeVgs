@@ -5,14 +5,13 @@
  */
 package controle;
 
-
+import com.google.gson.Gson;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import modelo.config;
-
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -33,49 +32,24 @@ public class ControleArquivo {
         try (FileWriter config_json = new FileWriter(System.getProperty("user.dir") + "/config.json")) {
             config_json.write(json.toString());
         }
-
-        json = capturaJson();
-        
-
         return true;
     }
 
     @SuppressWarnings("null")
-    public JSONObject capturaJson() throws FileNotFoundException, IOException, ParseException {
-       
-         JSONObject jsonObject;
-         JSONParser parser = new JSONParser();
 
-         jsonObject = (JSONObject) parser.parse(new FileReader(
-                    "config.json"));
-         
-         return jsonObject;
-    }
-    
-    public config configuracao() throws FileNotFoundException, IOException, ParseException, JSONException{
+    public config configuracao() throws FileNotFoundException, IOException, ParseException, JSONException {
         config c = new config();
-        /*JSONObject config = null;
-        JSONParser parser = new JSONParser();
+        Gson gson = new Gson();
+
         try {
-            //Salva no objeto JSONObject o que o parse tratou do arquivo
-            config = (JSONObject) parser.parse(new FileReader("config.json"));
-               
-             
-        } 
-        //Trata as exceptions que podem ser lançadas no decorrer do processo
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
+            
+            BufferedReader br = new BufferedReader(new FileReader("config.json"));
+            
+            c = gson.fromJson(br, config.class);
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
-        
-        
-        */
-        c.porta = "COM5";
-        
+
+        System.out.println(c.getPorta());
         return c;
     }
 
