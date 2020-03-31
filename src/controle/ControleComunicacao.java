@@ -15,7 +15,6 @@ import modelo.config;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.ParseException;
-import visao.frmSelecionaPortas;
 
 /**
  *
@@ -35,9 +34,14 @@ public class ControleComunicacao {
         return confirmacao;
     }
 
+    @SuppressWarnings("empty-statement")
     public int enviaProg(int linhas, int colunas, JLabel[] lComandos, JLabel[][] lLinhas) throws IOException, FileNotFoundException, ParseException, JSONException {
         int confirma = 0;
+
         ControleArquivo arquivo = new ControleArquivo();
+        ControleProgramacao contPro = new ControleProgramacao();
+        Programacao prog = new Programacao();
+
         config conf;
 
         conf = arquivo.configuracao();
@@ -45,10 +49,37 @@ public class ControleComunicacao {
         if (conf.porta == null) {
             JOptionPane.showMessageDialog(null, "Não há porta selecionada.\n Verifique a configuração de portas.");
             confirma = 3;
-        } else {
-            confirma = 1;
+            return confirma;
         }
+        if (confirmaConexao(conf.getPorta()) == false) {
+            JOptionPane.showMessageDialog(null, "A porta " + conf.getPorta() + " não está respondendo.\n Verifique a configuração de portas.");
+            confirma = 3;
+            return confirma;
+        };
 
+        prog = contPro.organizaComandosEnvio(linhas, colunas, lComandos, lLinhas);
+
+        if (comunica.sendCommand(conf.getPorta(), "Ini_envio_prog")) {
+            comunica.sendCommand(conf.getPorta(), "qntd_pacotes_enviar:" + prog.getPacotes().length);
+            int i = 0;
+            for (String pacote : prog.getPacotes()) {
+                if (comunica.sendCommand(conf.getPorta(), pacote) == false) {
+                    JOptionPane.showMessageDialog(null, "A porta " + conf.getPorta() + " não está respondendo.\n Verifique a configuração de portas.");
+                    confirma = 3;
+                    return confirma;
+                } else{
+                    System.out.println("Pacote "+i+"enviado com sucesso");
+                }
+                i++;
+            }
+
+        } else {
+           
+            JOptionPane.showMessageDialog(null, "A porta " + conf.getPorta() + " não está respondendo.\n Verifique a configuração de portas.");
+            confirma = 3;
+            return confirma;
+        };
+        confirma = 1;
         return confirma;
 
     }

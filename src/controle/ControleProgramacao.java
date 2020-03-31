@@ -115,7 +115,7 @@ public class ControleProgramacao {
 
         prog.parametros = jsonComandos;
         //System.out.println(jsonComandos);
-        organizaPacotes(prog);
+        prog = organizaPacotes(prog);
 
         return prog;
     }
