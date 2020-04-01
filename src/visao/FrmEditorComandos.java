@@ -5,13 +5,16 @@
  */
 package visao;
 
+import controle.ControleArquivo;
 import controle.ControleComunicacao;
 import controle.ControleProgramacao;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -163,7 +166,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setIconImages(null);
+        setTitle("IDE LADDER - Editor de Comandos");
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar1.setRollover(true);
@@ -180,6 +183,11 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         btnSalvar.setFocusable(false);
         btnSalvar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSalvar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnSalvar);
 
         salvarComo.setBackground(new java.awt.Color(255, 255, 255));
@@ -304,6 +312,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Saída em tempo real"));
 
+        ptxtSaida.setEditable(false);
         jScrollPane2.setViewportView(ptxtSaida);
 
         jButton1.setText("Atualizar Comandos");
@@ -1092,7 +1101,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
             int c = envia.enviaProg(qntdLinhas, qntdColunas, labelContatos, lineMatriz);
             switch (c) {
                 case 1:
-                    JOptionPane.showMessageDialog(null, "Enviado Corretamente!", "Envio", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Enviado Corretamente!");
                     break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "Erro ao Enviar!", "Envio", JOptionPane.WARNING_MESSAGE);
@@ -1106,6 +1115,8 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JSONException ex) {
+            Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
             Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -1282,6 +1293,18 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     private void cbxAtivarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxAtivarSaidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxAtivarSaidaActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        ControleArquivo arquivo = new ControleArquivo();
+        ControleProgramacao p = new ControleProgramacao();
+        try {
+            prog = p.organizaComandosEnvio(qntdLinhas, qntdColunas, labelLine, lineMatriz);
+            arquivo.salvaProg(prog);
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+        } catch (IOException | JSONException | ParseException ex) {
+            Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     private int alteraPorta(int atual) {
         int porta;

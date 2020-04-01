@@ -47,7 +47,7 @@ public class ControleProgramacao {
         String saidas = "";
 
         // captura status no objeto prog
-        prog.status = iniciaProg();
+        
 
         //percorre todos as labels comparando o icone com os comandos, salvando na matriz os as informações de comandos setados
         for (int i = 0; i < linhas; i++) {
@@ -114,8 +114,6 @@ public class ControleProgramacao {
         }
 
         prog.parametros = jsonComandos;
-        //System.out.println(jsonComandos);
-        prog = organizaPacotes(prog);
 
         return prog;
     }
@@ -128,9 +126,9 @@ public class ControleProgramacao {
         aux = p.parametros.toString();
 
         cont = (int) Math.floor(tamanhoVetor / 220) + 1;
-        
+
         String[] pacotes = new String[cont];
-        
+
         for (int i = 0; i < cont; i++) {
             if (i == cont - 1) {
                 pacotes[i] = aux.substring(i * 220, aux.length());
@@ -138,13 +136,13 @@ public class ControleProgramacao {
                 pacotes[i] = aux.substring(i * 220, (i * 220) + 220);
             }
         }
-        
+
         p.pacotes = pacotes;
-        
+
         return p;
     }
 
-    private JSONObject iniciaProg() throws JSONException, UnknownHostException, IOException, FileNotFoundException, ParseException {
+    public JSONObject iniciaProg() throws JSONException, UnknownHostException, IOException, FileNotFoundException, ParseException {
         JSONObject status = new JSONObject();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
@@ -156,6 +154,7 @@ public class ControleProgramacao {
         status.put("IP_carregou", InetAddress.getLocalHost().getAddress());
         status.put("Porta", c.porta);
 
+        System.out.println("Json Status Criado");
         return status;
 
     }

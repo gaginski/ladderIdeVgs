@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import modelo.Programacao;
 import modelo.config;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,8 +50,18 @@ public class ControleArquivo {
         } catch (IOException e) {
         }
 
-        System.out.println(c.getPorta());
         return c;
+    }
+    public boolean salvaProg(Programacao prog) throws IOException, JSONException, FileNotFoundException, ParseException {
+
+        
+
+        try (FileWriter prog_json = new FileWriter(System.getProperty("user.dir") + "/parametros.json")) {
+            prog_json.write(prog.getParametros().toString());
+        }
+        
+        System.out.println("Programação salva com sucesso!");
+        return true;
     }
 
 }

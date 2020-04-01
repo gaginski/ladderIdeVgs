@@ -7,6 +7,7 @@ package visao;
 
 import controle.ControleArquivo;
 import controle.ControleComunicacao;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -204,9 +205,11 @@ public class frmSelecionaPortas extends javax.swing.JFrame {
 
         if (porta == -1) {
             lblStatus.setText("<html>Não foi Possivel<br/>detectar Conexão Ativa!</html>");
+            lblStatus.setBackground(Color.red);
             cbmPortas.setSelectedIndex(0);
         } else {
             lblStatus.setText("<html>CLP conectado na<br/>porta: " + portas[porta] + "</html>");
+            lblStatus.setBackground(Color.green);
             cbmPortas.setSelectedIndex(porta );
         }
     }//GEN-LAST:event_btnVarreduraActionPerformed
