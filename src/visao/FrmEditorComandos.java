@@ -1060,6 +1060,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     private void btnConfiguraPortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguraPortaActionPerformed
         frmSelecionaPortas p = new frmSelecionaPortas();
         p.setVisible(true);
+        //
     }//GEN-LAST:event_btnConfiguraPortaActionPerformed
 
     private void lblContatoPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblContatoPMouseClicked
