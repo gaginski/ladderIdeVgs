@@ -52,12 +52,9 @@ public class ControleArquivo {
 
         return c;
     }
-    public boolean salvaProg(Programacao prog) throws IOException, JSONException, FileNotFoundException, ParseException {
-
-        
-
-        try (FileWriter prog_json = new FileWriter(System.getProperty("user.dir") + "/parametros.json")) {
-            prog_json.write(prog.getParametros().toString());
+    public boolean salvaProg(JSONObject prog, String local) throws IOException, JSONException, FileNotFoundException, ParseException {
+          try (FileWriter prog_json = new FileWriter("C://Downloads" +"/parametros.json")) {
+            prog_json.write(prog.toString());
         }
         
         System.out.println("Programação salva com sucesso!");
