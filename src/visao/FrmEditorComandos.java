@@ -16,9 +16,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.TransferHandler;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.Programacao;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -176,6 +178,11 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         btnArquivo.setFocusable(false);
         btnArquivo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnArquivo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnArquivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArquivoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnArquivo);
 
         btnSalvar.setBackground(new java.awt.Color(255, 255, 255));
@@ -1296,16 +1303,42 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxAtivarSaidaActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        ControleArquivo arquivo = new ControleArquivo();
-        ControleProgramacao p = new ControleProgramacao();
         try {
-            prog = p.organizaComandosEnvio(qntdLinhas, qntdColunas, labelLine, lineMatriz);
-            arquivo.salvaProg(prog);
+            JSONObject progSalva = geraJsonSalvar();
+            ControleArquivo cArquivo = new ControleArquivo();
+                JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int res = fc.showOpenDialog(null);
+        
+        if(res == JFileChooser.APPROVE_OPTION){
+                
+        try {
+            JOptionPane.showMessageDialog(null, fc.getSelectedFile().getAbsoluteFile());
+            cArquivo.salvaProg(progSalva, fc.getCurrentDirectory().getAbsolutePath());
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
         } catch (IOException | JSONException | ParseException ex) {
             Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }
+        else{
+                    JOptionPane.showMessageDialog(null, "Você não selecionou um diretório!");
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArquivoActionPerformed
+        JFileChooser arquivo = new JFileChooser();
+        FileNameExtensionFilter filtroPDF = new FileNameExtensionFilter("Arquivos JSON", "json");
+        arquivo.addChoosableFileFilter(filtroPDF);
+        arquivo.setAcceptAllFileFilterUsed(false);
+        if (arquivo.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            JOptionPane.showMessageDialog(null, arquivo.getSelectedFile().getAbsolutePath(), "Salva", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnArquivoActionPerformed
 
     private int alteraPorta(int atual) {
         int porta;
@@ -1394,6 +1427,21 @@ public class FrmEditorComandos extends javax.swing.JFrame {
             aux.setTransferHandler(new TransferHandler("icon"));
         }
 
+    }
+    public JSONObject geraJsonSalvar() throws JSONException{
+        JSONObject salvaProg = new JSONObject();
+        JSONObject auxComandos = new JSONObject();
+        JSONObject auxPortas = new JSONObject();
+        
+        for(int i = 0; i < labelLine.length; i++){
+            auxComandos.put("label" + i, labelLine[i].getIcon());
+            auxPortas.put("portaL" + i, labelLine[i].getText());
+        }
+        
+        salvaProg.put("comandos", auxComandos);
+        salvaProg.put("portas", auxPortas);
+        
+        return salvaProg;
     }
 
     /**
