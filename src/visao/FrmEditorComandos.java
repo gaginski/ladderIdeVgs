@@ -38,11 +38,24 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     int qntdLinhas = 6;
     int qntdColunas = 9;
     int qntdComandos = 5;
+
+    String nomeProjeto = null;
+    String diretorioProjeto = null;
+
     JLabel[][] lineMatriz = new JLabel[qntdLinhas][qntdColunas];
     JLabel[] labelLine = new JLabel[qntdLinhas * qntdColunas];
     JLabel[] labelContatos = new JLabel[qntdComandos];
     JSONObject jsonComandos = new JSONObject();
     Programacao prog = new Programacao();
+
+    public void novoProjeto(String nome, String diretorio) {
+        nomeProjeto = nome;
+        diretorioProjeto = diretorio;
+    }
+    public void abrirProjeto(String nome, String diretorio) {
+        nomeProjeto = nome;
+        diretorioProjeto = diretorio;
+    }
 
     public FrmEditorComandos() {
 
@@ -202,6 +215,11 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         salvarComo.setFocusable(false);
         salvarComo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         salvarComo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        salvarComo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvarComoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(salvarComo);
 
         btnConfiguraPorta.setBackground(new java.awt.Color(255, 255, 255));
@@ -1303,33 +1321,55 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxAtivarSaidaActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+
+        JSONObject progSalva = new JSONObject();
         try {
-            JSONObject progSalva = geraJsonSalvar();
-            ControleArquivo cArquivo = new ControleArquivo();
-                JFileChooser fc = new JFileChooser();
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int res = fc.showOpenDialog(null);
-        
-        if(res == JFileChooser.APPROVE_OPTION){
-                
-        try {
-            JOptionPane.showMessageDialog(null, fc.getSelectedFile().getAbsoluteFile());
-            cArquivo.salvaProg(progSalva, fc.getCurrentDirectory().getAbsolutePath());
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-        } catch (IOException | JSONException | ParseException ex) {
-            Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
-        else{
-                    JOptionPane.showMessageDialog(null, "Você não selecionou um diretório!");
-            }
+            progSalva = geraJsonSalvar();
         } catch (JSONException ex) {
             Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    
-    }//GEN-LAST:event_btnSalvarActionPerformed
+        ControleArquivo cArquivo = new ControleArquivo();
+        boolean verificaDiretorio = false;
 
+        if (diretorioProjeto == null) {
+            verificaDiretorio = pegaDiretorio();
+        } else {
+            verificaDiretorio = true;
+        }
+        if (verificaDiretorio) {
+
+            JOptionPane.showMessageDialog(null, diretorioProjeto);
+            try {
+                cArquivo.salvaProg(progSalva, diretorioProjeto);
+            } catch (IOException ex) {
+                Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JSONException ex) {
+                Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Diretório não selecionado!");
+        }
+
+
+    }//GEN-LAST:event_btnSalvarActionPerformed
+    public boolean pegaDiretorio() {
+        boolean verifica = false;
+
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int res = fc.showOpenDialog(null);
+
+        if (res == JFileChooser.APPROVE_OPTION) {
+            verifica = true;
+            diretorioProjeto = fc.getCurrentDirectory().getAbsolutePath();
+        }
+        return verifica;
+
+    }
     private void btnArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArquivoActionPerformed
         JFileChooser arquivo = new JFileChooser();
         FileNameExtensionFilter filtroPDF = new FileNameExtensionFilter("Arquivos JSON", "json");
@@ -1339,6 +1379,10 @@ public class FrmEditorComandos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, arquivo.getSelectedFile().getAbsolutePath(), "Salva", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnArquivoActionPerformed
+
+    private void salvarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarComoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salvarComoActionPerformed
 
     private int alteraPorta(int atual) {
         int porta;
@@ -1428,19 +1472,20 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         }
 
     }
-    public JSONObject geraJsonSalvar() throws JSONException{
+
+    public JSONObject geraJsonSalvar() throws JSONException {
         JSONObject salvaProg = new JSONObject();
         JSONObject auxComandos = new JSONObject();
         JSONObject auxPortas = new JSONObject();
-        
-        for(int i = 0; i < labelLine.length; i++){
+
+        for (int i = 0; i < labelLine.length; i++) {
             auxComandos.put("label" + i, labelLine[i].getIcon());
             auxPortas.put("portaL" + i, labelLine[i].getText());
         }
-        
+
         salvaProg.put("comandos", auxComandos);
         salvaProg.put("portas", auxPortas);
-        
+
         return salvaProg;
     }
 

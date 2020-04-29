@@ -138,7 +138,7 @@ public class frmInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void brnNovoProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnNovoProjetoActionPerformed
-      FrmEditorComandos a = new FrmEditorComandos();
+      frmNovoProjeto a = new frmNovoProjeto();
       a.setVisible(true);
       this.dispose();
     }//GEN-LAST:event_brnNovoProjetoActionPerformed
