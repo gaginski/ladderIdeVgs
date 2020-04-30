@@ -5,6 +5,7 @@
  */
 package visao;
 
+import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -156,7 +157,7 @@ public class frmNovoProjeto extends javax.swing.JFrame {
         int res = fc.showOpenDialog(null);
 
         if (res == JFileChooser.APPROVE_OPTION) {
-            txtDiretorio.setText(fc.getCurrentDirectory().getAbsolutePath());
+            txtDiretorio.setText(fc.getSelectedFile().getAbsolutePath());
         } else{
             JOptionPane.showMessageDialog(null, "Diretório não selecionado!");
         }
@@ -167,7 +168,8 @@ public class frmNovoProjeto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Escolha um Nome e Diretório para o Projeto!");
         } else{
             FrmEditorComandos a = new FrmEditorComandos();
-            a.novoProjeto(txtNomeProjeto.getText(), txtDiretorio.getText());
+            File diretorio = new File(txtDiretorio.getText());
+            a.novoProjeto(txtNomeProjeto.getText(), diretorio);
             a.setVisible(true);
             this.dispose();
         }

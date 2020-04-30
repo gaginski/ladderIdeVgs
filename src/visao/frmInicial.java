@@ -5,6 +5,20 @@
  */
 package visao;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.json.JSONException;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 /**
  *
  * @author Vitor
@@ -144,7 +158,35 @@ public class frmInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_brnNovoProjetoActionPerformed
 
     private void btnAbrirProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirProjetoActionPerformed
-        // TODO add your handling code here:
+        JFileChooser arquivo = new JFileChooser();
+        JSONParser parser = new JSONParser();
+        FileNameExtensionFilter filtroPDF = new FileNameExtensionFilter("Arquivos JSON", "json");
+        JSONObject leitura = new JSONObject();
+       
+        arquivo.addChoosableFileFilter(filtroPDF);
+        arquivo.setAcceptAllFileFilterUsed(false);
+        
+        if (arquivo.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            FrmEditorComandos a = new FrmEditorComandos();
+             a.setVisible(true);
+           
+            
+            try {
+                leitura = (JSONObject) parser.parse(new FileReader(arquivo.getSelectedFile().getAbsolutePath()));
+                System.out.println(leitura);
+            } catch (ParseException | IOException ex) {
+                Logger.getLogger(frmInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try {
+                File diretorio = new File(arquivo.getSelectedFile().getAbsolutePath());
+                a.abrirProjeto("alterar", diretorio , leitura);
+            } catch (JSONException ex) {
+                Logger.getLogger(frmInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        }
     }//GEN-LAST:event_btnAbrirProjetoActionPerformed
 
     private void btnSimuladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimuladorActionPerformed

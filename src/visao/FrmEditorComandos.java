@@ -10,7 +10,7 @@ import controle.ControleComunicacao;
 import controle.ControleProgramacao;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +23,7 @@ import javax.swing.TransferHandler;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.Programacao;
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 /**
@@ -40,7 +40,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     int qntdComandos = 5;
 
     String nomeProjeto = null;
-    String diretorioProjeto = null;
+    File diretorioProjeto = new File(System.getProperty("user.dir"));
 
     JLabel[][] lineMatriz = new JLabel[qntdLinhas][qntdColunas];
     JLabel[] labelLine = new JLabel[qntdLinhas * qntdColunas];
@@ -48,14 +48,11 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     JSONObject jsonComandos = new JSONObject();
     Programacao prog = new Programacao();
 
-    public void novoProjeto(String nome, String diretorio) {
+    public void novoProjeto(String nome, File diretorio) {
         nomeProjeto = nome;
         diretorioProjeto = diretorio;
     }
-    public void abrirProjeto(String nome, String diretorio) {
-        nomeProjeto = nome;
-        diretorioProjeto = diretorio;
-    }
+   
 
     public FrmEditorComandos() {
 
@@ -67,7 +64,28 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
 
     }
-
+ public void abrirProjeto(String nome, File diretorio, JSONObject progSalva) throws JSONException {
+        nomeProjeto = nome;
+        diretorioProjeto = diretorio;
+        
+        JSONObject portas = (JSONObject) progSalva.get("portas");
+        JSONObject comandos = (JSONObject) progSalva.get("comandos");
+        
+        System.out.println(progSalva);
+        System.out.println(portas);
+        System.out.println(comandos);
+        
+        for(int i = 0; i < labelLine.length; i++){
+            ImageIcon ico;
+            String path = (String) comandos.get("comando"+i);
+                                  
+            ico = new ImageIcon(System.getProperty("user.dir") + "/src/icones/" + path, "label");
+            
+            labelLine[i].setIcon(ico);
+            labelLine[i].setText((String) portas.get("porta"+i));
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1337,15 +1355,9 @@ public class FrmEditorComandos extends javax.swing.JFrame {
             verificaDiretorio = true;
         }
         if (verificaDiretorio) {
-
-            JOptionPane.showMessageDialog(null, diretorioProjeto);
             try {
-                cArquivo.salvaProg(progSalva, diretorioProjeto);
-            } catch (IOException ex) {
-                Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (JSONException ex) {
-                Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
+                cArquivo.salvaProg(progSalva, diretorioProjeto, nomeProjeto);
+            } catch (IOException | JSONException | ParseException ex) {
                 Logger.getLogger(FrmEditorComandos.class.getName()).log(Level.SEVERE, null, ex);
             }
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
@@ -1365,7 +1377,8 @@ public class FrmEditorComandos extends javax.swing.JFrame {
 
         if (res == JFileChooser.APPROVE_OPTION) {
             verifica = true;
-            diretorioProjeto = fc.getCurrentDirectory().getAbsolutePath();
+            File diretorio = new File(fc.getSelectedFile().getAbsolutePath());
+            diretorioProjeto = diretorio;
         }
         return verifica;
 
@@ -1479,8 +1492,10 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         JSONObject auxPortas = new JSONObject();
 
         for (int i = 0; i < labelLine.length; i++) {
-            auxComandos.put("label" + i, labelLine[i].getIcon());
-            auxPortas.put("portaL" + i, labelLine[i].getText());
+          File arquivo;
+          arquivo = new File(labelLine[i].getIcon().toString());
+          auxComandos.put("comando"+i, arquivo.getName());
+          auxPortas.put("porta"+i, labelLine[i].getText());
         }
 
         salvaProg.put("comandos", auxComandos);

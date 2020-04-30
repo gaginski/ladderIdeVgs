@@ -7,6 +7,7 @@ package controle;
 
 import com.google.gson.Gson;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,7 +15,7 @@ import java.io.IOException;
 import modelo.Programacao;
 import modelo.config;
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -52,8 +53,8 @@ public class ControleArquivo {
 
         return c;
     }
-    public boolean salvaProg(JSONObject prog, String local) throws IOException, JSONException, FileNotFoundException, ParseException {
-          try (FileWriter prog_json = new FileWriter("C://Downloads" +"/parametros.json")) {
+    public boolean salvaProg(JSONObject prog, File diretorio, String nomeProjeto) throws IOException, JSONException, FileNotFoundException, ParseException {
+          try (FileWriter prog_json = new FileWriter(diretorio +"/"+nomeProjeto+".json")) {
             prog_json.write(prog.toString());
         }
         
