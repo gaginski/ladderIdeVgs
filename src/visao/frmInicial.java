@@ -185,6 +185,7 @@ public class frmInicial extends javax.swing.JFrame {
                 Logger.getLogger(frmInicial.class.getName()).log(Level.SEVERE, null, ex);
             }
             
+            this.dispose();
             
         }
     }//GEN-LAST:event_btnAbrirProjetoActionPerformed

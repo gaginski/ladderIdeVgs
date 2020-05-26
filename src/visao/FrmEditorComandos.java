@@ -11,6 +11,7 @@ import controle.ControleProgramacao;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +25,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.Programacao;
 import org.json.JSONException;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
@@ -52,7 +54,6 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         nomeProjeto = nome;
         diretorioProjeto = diretorio;
     }
-   
 
     public FrmEditorComandos() {
 
@@ -64,28 +65,30 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
 
     }
- public void abrirProjeto(String nome, File diretorio, JSONObject progSalva) throws JSONException {
+
+    public void abrirProjeto(String nome, File diretorio, JSONObject progSalva) throws JSONException {
         nomeProjeto = nome;
         diretorioProjeto = diretorio;
-        
+
         JSONObject portas = (JSONObject) progSalva.get("portas");
         JSONObject comandos = (JSONObject) progSalva.get("comandos");
-        
+
         System.out.println(progSalva);
         System.out.println(portas);
         System.out.println(comandos);
-        
-        for(int i = 0; i < labelLine.length; i++){
+
+        for (int i = 0; i < labelLine.length; i++) {
             ImageIcon ico;
-            String path = (String) comandos.get("comando"+i);
-                                  
+            String path = (String) comandos.get("comando" + i);
+
             ico = new ImageIcon(System.getProperty("user.dir") + "/src/icones/" + path, "label");
-            
+
             labelLine[i].setIcon(ico);
-            labelLine[i].setText((String) portas.get("porta"+i));
+            labelLine[i].setText((String) portas.get("porta" + i));
         }
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1339,6 +1342,10 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxAtivarSaidaActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        salva(false);
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    public void salva(boolean novoDiretorio) {
 
         JSONObject progSalva = new JSONObject();
         try {
@@ -1349,7 +1356,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         ControleArquivo cArquivo = new ControleArquivo();
         boolean verificaDiretorio = false;
 
-        if (diretorioProjeto == null) {
+        if (diretorioProjeto == null || novoDiretorio) {
             verificaDiretorio = pegaDiretorio();
         } else {
             verificaDiretorio = true;
@@ -1365,9 +1372,8 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Diretório não selecionado!");
         }
+    }
 
-
-    }//GEN-LAST:event_btnSalvarActionPerformed
     public boolean pegaDiretorio() {
         boolean verifica = false;
 
@@ -1384,17 +1390,41 @@ public class FrmEditorComandos extends javax.swing.JFrame {
 
     }
     private void btnArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArquivoActionPerformed
-        JFileChooser arquivo = new JFileChooser();
+        if(JOptionPane.showConfirmDialog( null,"Deseja Salvar o Projeto Atual?", "Salvar",JOptionPane.YES_NO_OPTION) == 0){
+            salva(false);
+        }
+           JFileChooser arquivo = new JFileChooser();
+        JSONParser parser = new JSONParser();
         FileNameExtensionFilter filtroPDF = new FileNameExtensionFilter("Arquivos JSON", "json");
+        JSONObject leitura = new JSONObject();
+       
         arquivo.addChoosableFileFilter(filtroPDF);
         arquivo.setAcceptAllFileFilterUsed(false);
+        
         if (arquivo.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            JOptionPane.showMessageDialog(null, arquivo.getSelectedFile().getAbsolutePath(), "Salva", JOptionPane.WARNING_MESSAGE);
+            FrmEditorComandos a = new FrmEditorComandos();
+             a.setVisible(true);
+           
+            
+            try {
+                leitura = (JSONObject) parser.parse(new FileReader(arquivo.getSelectedFile().getAbsolutePath()));
+               } catch (ParseException | IOException ex) {
+                Logger.getLogger(frmInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            try {
+                File diretorio = new File(arquivo.getSelectedFile().getAbsolutePath());
+                a.abrirProjeto("alterar", diretorio , leitura);
+            } catch (JSONException ex) {
+                Logger.getLogger(frmInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            this.dispose();
         }
     }//GEN-LAST:event_btnArquivoActionPerformed
 
     private void salvarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarComoActionPerformed
-        // TODO add your handling code here:
+        salva(true);
     }//GEN-LAST:event_salvarComoActionPerformed
 
     private int alteraPorta(int atual) {
@@ -1492,10 +1522,10 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         JSONObject auxPortas = new JSONObject();
 
         for (int i = 0; i < labelLine.length; i++) {
-          File arquivo;
-          arquivo = new File(labelLine[i].getIcon().toString());
-          auxComandos.put("comando"+i, arquivo.getName());
-          auxPortas.put("porta"+i, labelLine[i].getText());
+            File arquivo;
+            arquivo = new File(labelLine[i].getIcon().toString());
+            auxComandos.put("comando" + i, arquivo.getName());
+            auxPortas.put("porta" + i, labelLine[i].getText());
         }
 
         salvaProg.put("comandos", auxComandos);
