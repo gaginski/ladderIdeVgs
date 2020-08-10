@@ -453,7 +453,7 @@
         <Component class="javax.swing.JCheckBox" name="cbxAtivarSaida">
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Ativar painel de Saida"/>
+            <Property name="text" type="java.lang.String" value="Ativar painel de Sa&#xed;da"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxAtivarSaidaActionPerformed"/>

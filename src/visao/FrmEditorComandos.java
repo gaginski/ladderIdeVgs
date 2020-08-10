@@ -376,7 +376,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         });
 
         cbxAtivarSaida.setSelected(true);
-        cbxAtivarSaida.setText("Ativar painel de Saida");
+        cbxAtivarSaida.setText("Ativar painel de Saída");
         cbxAtivarSaida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxAtivarSaidaActionPerformed(evt);

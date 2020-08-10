@@ -13,7 +13,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import modelo.Programacao;
-import modelo.config;
+import modelo.Configuracoes;
 import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -39,15 +39,15 @@ public class ControleArquivo {
 
     @SuppressWarnings("null")
 
-    public config configuracao() throws FileNotFoundException, IOException, ParseException, JSONException {
-        config c = new config();
+    public Configuracoes configuracao() throws FileNotFoundException, IOException, ParseException, JSONException {
+        Configuracoes c = new Configuracoes();
         Gson gson = new Gson();
 
         try {
             
             BufferedReader br = new BufferedReader(new FileReader("config.json"));
             
-            c = gson.fromJson(br, config.class);
+            c = gson.fromJson(br, Configuracoes.class);
         } catch (IOException e) {
         }
 

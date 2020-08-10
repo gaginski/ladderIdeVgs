@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JLabel;
 import modelo.Programacao;
-import modelo.config;
+import modelo.Configuracoes;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -125,7 +125,7 @@ public class ControleProgramacao {
 
         aux = p.parametros.toString();
 
-        cont = (int) Math.floor(tamanhoVetor / 220) + 1;
+        cont = (int) Math.floor(tamanhoVetor / 240) + 1;
 
         String[] pacotes = new String[cont];
 
@@ -146,7 +146,7 @@ public class ControleProgramacao {
         JSONObject status = new JSONObject();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
-        config c = new config();
+        Configuracoes c = new Configuracoes();
         c = controleArquivo.configuracao();
 
         status.put("DataHoraCarregamento", dateFormat.format(date));

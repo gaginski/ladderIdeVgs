@@ -11,7 +11,7 @@ import java.io.IOException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import modelo.Programacao;
-import modelo.config;
+import modelo.Configuracoes;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -43,7 +43,7 @@ public class ControleComunicacao {
         ControleProgramacao contPro = new ControleProgramacao();
         Programacao prog = new Programacao();
 
-        config conf;
+        Configuracoes conf;
 
         prog.status = contPro.iniciaProg();
 

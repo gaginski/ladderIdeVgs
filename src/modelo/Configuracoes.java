@@ -9,14 +9,14 @@ package modelo;
  *
  * @author Vitor
  */
-public class config {
+public class Configuracoes {
     public String porta;
 
-    public config(String porta) {
+    public Configuracoes(String porta) {
         this.porta = porta;
     }
     
-    public config() {
+    public Configuracoes() {
         this.porta = null;
     }
     
