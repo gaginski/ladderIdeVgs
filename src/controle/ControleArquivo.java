@@ -12,12 +12,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import modelo.Programacao;
 import modelo.Configuracoes;
 import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import visao.FrmEditorComandos;
 
 /**
  *
@@ -25,34 +30,8 @@ import org.json.simple.parser.ParseException;
  */
 public class ControleArquivo {
 
-    public boolean salvaPorta(String porta) throws IOException, JSONException, FileNotFoundException, ParseException {
-
-        JSONObject json = new JSONObject();
-
-        json.put("porta", porta);
-
-        try (FileWriter config_json = new FileWriter(System.getProperty("user.dir") + "/config.json")) {
-            config_json.write(json.toString());
-        }
-        return true;
-    }
-
     @SuppressWarnings("null")
 
-    public Configuracoes configuracao() throws FileNotFoundException, IOException, ParseException, JSONException {
-        Configuracoes c = new Configuracoes();
-        Gson gson = new Gson();
-
-        try {
-            
-            BufferedReader br = new BufferedReader(new FileReader("config.json"));
-            
-            c = gson.fromJson(br, Configuracoes.class);
-        } catch (IOException e) {
-        }
-
-        return c;
-    }
     public boolean salvaProg(JSONObject prog, File diretorio, String nomeProjeto) throws IOException, JSONException, FileNotFoundException, ParseException {
           try (FileWriter prog_json = new FileWriter(diretorio +"/"+nomeProjeto+".json")) {
             prog_json.write(prog.toString());
@@ -61,5 +40,41 @@ public class ControleArquivo {
         System.out.println("Programação salva com sucesso!");
         return true;
     }
+    // IMPORTANTE - REFORMULAR, COLOCAR NO CONTROLEARQUIVO
+    private File pegaDiretorio(File diretorioProjeto ) {
+        boolean verifica = false;
 
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int res = fc.showOpenDialog(null);
+
+        if (res == JFileChooser.APPROVE_OPTION) {
+            verifica = true;
+            File diretorio = new File(fc.getSelectedFile().getAbsolutePath());
+            diretorioProjeto = diretorio;
+        }
+        return diretorioProjeto;
+
+    }
+ // IMPORTANTE - REFORMULAR, COLOCAR NO CONTROLEARQUIVO
+    /* public void salva(boolean novoDiretorio) {
+
+        JSONObject progSalva = new JSONObject();
+        progSalva = geraJsonSalvar();
+        ControleArquivo cArquivo = new ControleArquivo();
+        boolean verificaDiretorio = false;
+
+        if (diretorioProjeto == null || novoDiretorio) {
+            verificaDiretorio = pegaDiretorio();
+        } else {
+            verificaDiretorio = true;
+        }
+        if (verificaDiretorio) {
+            cArquivo.salvaProg(progSalva, diretorioProjeto, nomeProjeto);
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Diretório não selecionado!");
+        }
+    }*/
 }

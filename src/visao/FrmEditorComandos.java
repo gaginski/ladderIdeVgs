@@ -1344,7 +1344,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         salva(false);
     }//GEN-LAST:event_btnSalvarActionPerformed
-
+// IMPORTANTE - REFORMULAR, COLOCAR NO CONTROLEARQUIVO
     public void salva(boolean novoDiretorio) {
 
         JSONObject progSalva = new JSONObject();
@@ -1373,7 +1373,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Diretório não selecionado!");
         }
     }
-
+// IMPORTANTE - REFORMULAR, COLOCAR NO CONTROLEARQUIVO
     public boolean pegaDiretorio() {
         boolean verifica = false;
 

@@ -26,7 +26,7 @@ import org.json.simple.parser.ParseException;
 public class ControleProgramacao {
 
     Programacao prog = new Programacao();
-    ControleArquivo controleArquivo = new ControleArquivo();
+    
     String stringComandos = "";
 
     public String organizaComandosExibicao(int linhas, int colunas, JLabel[] lComandos, JLabel[][] lLinhas) throws JSONException, IOException, UnknownHostException, FileNotFoundException, ParseException {
@@ -143,16 +143,19 @@ public class ControleProgramacao {
     }
 
     public JSONObject iniciaProg() throws JSONException, UnknownHostException, IOException, FileNotFoundException, ParseException {
+        controleConfiguracao controleArquivo = new controleConfiguracao();
         JSONObject status = new JSONObject();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
-        Configuracoes c = new Configuracoes();
-        c = controleArquivo.configuracao();
+        Configuracoes config  = new Configuracoes();
+      
+        
+        config = controleArquivo.configuracao();
 
         status.put("DataHoraCarregamento", dateFormat.format(date));
         status.put("Pc_Carregou", InetAddress.getLocalHost().getHostName());
         status.put("IP_carregou", InetAddress.getLocalHost().getAddress());
-        status.put("Porta", c.porta);
+        status.put("Porta", config.porta);
 
         System.out.println("Json Status Criado");
         return status;

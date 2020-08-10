@@ -36,10 +36,10 @@ public class ControleComunicacao {
 
     @SuppressWarnings("empty-statement")
     public int enviaProg(int linhas, int colunas, JLabel[] lComandos, JLabel[][] lLinhas) throws IOException, FileNotFoundException, ParseException, JSONException, InterruptedException {
-        int confirma = 0;
+        int confirma;
 
         System.out.println("-----------------INICIO DO ENVIO-----------------");
-        ControleArquivo arquivo = new ControleArquivo();
+        controleConfiguracao config = new controleConfiguracao();
         ControleProgramacao contPro = new ControleProgramacao();
         Programacao prog = new Programacao();
 
@@ -47,7 +47,7 @@ public class ControleComunicacao {
 
         prog.status = contPro.iniciaProg();
 
-        conf = arquivo.configuracao();
+        conf = config.configuracao();
         System.out.println("Leitura do aquivo de configuração, porta" + conf.getPorta() + " configurada");
 
         if (conf.porta == null) {

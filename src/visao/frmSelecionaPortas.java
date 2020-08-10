@@ -5,8 +5,8 @@
  */
 package visao;
 
-import controle.ControleArquivo;
 import controle.ControleComunicacao;
+import controle.controleConfiguracao;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -219,27 +219,23 @@ public class frmSelecionaPortas extends javax.swing.JFrame {
     }//GEN-LAST:event_cbmPortasActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        ControleArquivo c = new ControleArquivo();
+        controleConfiguracao config = new controleConfiguracao();
 
         if (cbmPortas.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null,"Selecione uma porta para salvar","Atenção",  JOptionPane.WARNING_MESSAGE);
             cbmPortas.requestFocus();
         }else{
         try {
-            if (c.salvaPorta((String) cbmPortas.getSelectedItem())) {
+            if (config.salvaPorta((String) cbmPortas.getSelectedItem())) {
                 JOptionPane.showMessageDialog(null, "Configurações Salvas com Sucesso!");
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Ocorreu um erro ao Gravar, tente novamente.");
 
             }
-        } catch (IOException ex) {
+        } catch (IOException | JSONException | ParseException ex) {
             Logger.getLogger(frmSelecionaPortas.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JSONException ex) {
-            Logger.getLogger(frmSelecionaPortas.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-                Logger.getLogger(frmSelecionaPortas.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        }
         }
 
 
