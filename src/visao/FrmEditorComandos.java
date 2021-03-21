@@ -13,6 +13,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -22,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.TransferHandler;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import modelo.Comando;
 import modelo.Programacao;
 import org.json.JSONException;
 import org.json.simple.JSONObject;
@@ -47,6 +49,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     JLabel[][] lineMatriz = new JLabel[qntdLinhas][qntdColunas];
     JLabel[] labelLine = new JLabel[qntdLinhas * qntdColunas];
     JLabel[] labelContatos = new JLabel[qntdComandos];
+    LinkedList<Comando> listaComandos = new LinkedList<Comando>();
     JSONObject jsonComandos = new JSONObject();
     Programacao prog = new Programacao();
 
@@ -61,7 +64,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         populaVariaveis();
         movimentacoesBlocosEntrada();
-
+        this.setIconImage(new ImageIcon(getClass().getResource("/icones/LogoVGS_icon.png")).getImage());
         this.setExtendedState(MAXIMIZED_BOTH);
 
     }
@@ -183,6 +186,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         lblPorta = new javax.swing.JLabel();
+        lblTimmerTon = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -260,6 +264,11 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         btnVerificaConexao.setFocusable(false);
         btnVerificaConexao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnVerificaConexao.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnVerificaConexao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificaConexaoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnVerificaConexao);
 
         btnConfiguracao.setBackground(new java.awt.Color(255, 255, 255));
@@ -267,6 +276,11 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         btnConfiguracao.setFocusable(false);
         btnConfiguracao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnConfiguracao.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnConfiguracao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfiguracaoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnConfiguracao);
 
         btnCarregar.setBackground(new java.awt.Color(255, 255, 255));
@@ -421,18 +435,43 @@ public class FrmEditorComandos extends javax.swing.JFrame {
 
         lbLocal3_5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal3_5.setText("3");
+        lbLocal3_5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal3_5MouseClicked(evt);
+            }
+        });
 
         lbLocal3_6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal3_6.setText("3");
+        lbLocal3_6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal3_6MouseClicked(evt);
+            }
+        });
 
         lbLocal3_7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal3_7.setText("3");
+        lbLocal3_7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal3_7MouseClicked(evt);
+            }
+        });
 
         lbLocal3_8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal3_8.setText("3");
+        lbLocal3_8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal3_8MouseClicked(evt);
+            }
+        });
 
         lbLocal3_9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal3_9.setText("3");
+        lbLocal3_9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal3_9MouseClicked(evt);
+            }
+        });
 
         lbLocal4_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal4_1.setText("4");
@@ -447,21 +486,51 @@ public class FrmEditorComandos extends javax.swing.JFrame {
 
         lbLocal4_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal4_2.setText("4");
+        lbLocal4_2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal4_2MouseClicked(evt);
+            }
+        });
 
         lbLocal4_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal4_3.setText("4");
+        lbLocal4_3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal4_3MouseClicked(evt);
+            }
+        });
 
         lbLocal4_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal4_4.setText("4");
+        lbLocal4_4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal4_4MouseClicked(evt);
+            }
+        });
 
         lbLocal4_5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal4_5.setText("4");
+        lbLocal4_5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal4_5MouseClicked(evt);
+            }
+        });
 
         lbLocal4_6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal4_6.setText("4");
+        lbLocal4_6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal4_6MouseClicked(evt);
+            }
+        });
 
         lbLocal4_7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal4_7.setText("4");
+        lbLocal4_7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal4_7MouseClicked(evt);
+            }
+        });
 
         lbLocal4_8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal4_8.setText("4");
@@ -485,6 +554,11 @@ public class FrmEditorComandos extends javax.swing.JFrame {
 
         lbLocal5_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal5_2.setText("5");
+        lbLocal5_2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal5_2MouseClicked(evt);
+            }
+        });
 
         lbLocal5_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal5_3.setText("5");
@@ -707,19 +781,34 @@ public class FrmEditorComandos extends javax.swing.JFrame {
 
         lbLocal3_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal3_2.setText("3");
+        lbLocal3_2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal3_2MouseClicked(evt);
+            }
+        });
 
         lbLocal3_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal3_3.setText("3");
+        lbLocal3_3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal3_3MouseClicked(evt);
+            }
+        });
 
         lbLocal3_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png"))); // NOI18N
         lbLocal3_4.setText("3");
+        lbLocal3_4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLocal3_4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lbLocal1_1)
@@ -1008,6 +1097,16 @@ public class FrmEditorComandos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lblTimmerTon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/timmerTON.png"))); // NOI18N
+        lblTimmerTon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblTimmerTonMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblTimmerTonMousePressed(evt);
+            }
+        });
+
         jMenu1.setText("Arquivos");
         jMenuBar1.add(jMenu1);
 
@@ -1031,31 +1130,33 @@ public class FrmEditorComandos extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblContatoNA)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblContatoNF)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblContatoP)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblContatoN))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblSaidaNA)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblSaidaNF)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblSaidaP)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblSaidaN))
-                            .addComponent(jSeparator1))
-                        .addContainerGap(75, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTimmerTon)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel1)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblContatoNA)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblContatoNF)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblContatoP)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblContatoN))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblSaidaNA)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblSaidaNF)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblSaidaP)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblSaidaN))
+                                .addComponent(jSeparator1)))
+                        .addContainerGap(75, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1066,7 +1167,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblSaidaN, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1085,6 +1186,8 @@ public class FrmEditorComandos extends javax.swing.JFrame {
                                     .addComponent(lblSaidaNF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblSaidaP, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblSaidaNA, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblTimmerTon, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1191,39 +1294,39 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     }//GEN-LAST:event_lblSaidaNMouseClicked
 
     private void lblSaidaNMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSaidaNMousePressed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_lblSaidaNMousePressed
 
     private void lbLocal6_1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal6_1MousePressed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_lbLocal6_1MousePressed
 
     private void lbLocal6_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal6_1MouseClicked
-        // TODO add your handling code here:
+      clickLabel(evt);    
     }//GEN-LAST:event_lbLocal6_1MouseClicked
 
     private void lbLocal5_1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal5_1MousePressed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_lbLocal5_1MousePressed
 
     private void lbLocal5_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal5_1MouseClicked
-        // TODO add your handling code here:
+       clickLabel(evt);    
     }//GEN-LAST:event_lbLocal5_1MouseClicked
 
     private void lbLocal4_1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal4_1MousePressed
-        // TODO add your handling code here:
+         
     }//GEN-LAST:event_lbLocal4_1MousePressed
 
     private void lbLocal4_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal4_1MouseClicked
-        // TODO add your handling code here:
+       clickLabel(evt);    
     }//GEN-LAST:event_lbLocal4_1MouseClicked
 
     private void lbLocal3_1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal3_1MousePressed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_lbLocal3_1MousePressed
 
     private void lbLocal3_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal3_1MouseClicked
-        lbLocal3_1.setText("" + alteraPorta(Integer.parseInt(lbLocal3_1.getText())));
+       clickLabel(evt);    
     }//GEN-LAST:event_lbLocal3_1MouseClicked
 
     private void lbLocal2_1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal2_1MousePressed
@@ -1231,11 +1334,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     }//GEN-LAST:event_lbLocal2_1MousePressed
 
     private void lbLocal2_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal2_1MouseClicked
-        if ((evt.getModifiers() & MouseEvent.BUTTON3_MASK) != 0) {
-            lbLocal1_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png")));
-        } else {
-            lbLocal2_1.setText("" + alteraPorta(Integer.parseInt(lbLocal2_1.getText())));
-        }
+       clickLabel(evt);     
     }//GEN-LAST:event_lbLocal2_1MouseClicked
 
     private void lbLocal1_1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal1_1MousePressed
@@ -1243,83 +1342,75 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     }//GEN-LAST:event_lbLocal1_1MousePressed
 
     private void lbLocal1_1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal1_1MouseClicked
-        if ((evt.getModifiers() & MouseEvent.BUTTON3_MASK) != 0) {
-            lbLocal1_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png")));
-        } else {
-            lbLocal1_1.setText("" + alteraPorta(Integer.parseInt(lbLocal1_1.getText())));
-        }
+        clickLabel(evt);        
     }//GEN-LAST:event_lbLocal1_1MouseClicked
 
     private void lbLocal6_7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal6_7MouseClicked
-        lbLocal6_7.setText("" + alteraPorta(Integer.parseInt(lbLocal6_7.getText())));
+       clickLabel(evt);    
     }//GEN-LAST:event_lbLocal6_7MouseClicked
 
     private void lbLocal1_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal1_2MouseClicked
-        if ((evt.getModifiers() & MouseEvent.BUTTON3_MASK) != 0) {
-            lbLocal1_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/condicao.png")));
-        } else {
-            lbLocal1_2.setText("" + alteraPorta(Integer.parseInt(lbLocal1_2.getText())));
-        }
+        clickLabel(evt);    
     }//GEN-LAST:event_lbLocal1_2MouseClicked
 
     private void lbLocal1_3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal1_3MouseClicked
-        lbLocal1_3.setText("" + alteraPorta(Integer.parseInt(lbLocal1_3.getText())));
+        clickLabel(evt);    
     }//GEN-LAST:event_lbLocal1_3MouseClicked
 
     private void lbLocal1_4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal1_4MouseClicked
-        lbLocal1_4.setText("" + alteraPorta(Integer.parseInt(lbLocal1_4.getText())));
+        clickLabel(evt);    
     }//GEN-LAST:event_lbLocal1_4MouseClicked
 
     private void lbLocal1_5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal1_5MouseClicked
-        lbLocal1_5.setText("" + alteraPorta(Integer.parseInt(lbLocal1_5.getText())));
+        clickLabel(evt);    
     }//GEN-LAST:event_lbLocal1_5MouseClicked
 
     private void lbLocal1_6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal1_6MouseClicked
-        lbLocal1_6.setText("" + alteraPorta(Integer.parseInt(lbLocal1_6.getText())));
+       clickLabel(evt);    
     }//GEN-LAST:event_lbLocal1_6MouseClicked
 
     private void lbLocal1_7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal1_7MouseClicked
-        lbLocal1_7.setText("" + alteraPorta(Integer.parseInt(lbLocal1_7.getText())));
+        clickLabel(evt);    
     }//GEN-LAST:event_lbLocal1_7MouseClicked
 
     private void lbLocal1_8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal1_8MouseClicked
-        lbLocal1_8.setText("" + alteraPorta(Integer.parseInt(lbLocal1_8.getText())));
+       clickLabel(evt);    
     }//GEN-LAST:event_lbLocal1_8MouseClicked
 
     private void lbLocal1_9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal1_9MouseClicked
-        lbLocal1_9.setText("" + alteraPorta(Integer.parseInt(lbLocal1_9.getText())));
+        clickLabel(evt);    
     }//GEN-LAST:event_lbLocal1_9MouseClicked
 
     private void lbLocal2_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal2_2MouseClicked
-        lbLocal2_2.setText("" + alteraPorta(Integer.parseInt(lbLocal2_2.getText())));
+       clickLabel(evt);    
     }//GEN-LAST:event_lbLocal2_2MouseClicked
 
     private void lbLocal2_3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal2_3MouseClicked
-        lbLocal2_3.setText("" + alteraPorta(Integer.parseInt(lbLocal2_3.getText())));
+        clickLabel(evt);    
     }//GEN-LAST:event_lbLocal2_3MouseClicked
 
     private void lbLocal2_4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal2_4MouseClicked
-        lbLocal2_4.setText("" + alteraPorta(Integer.parseInt(lbLocal2_4.getText())));
+       clickLabel(evt);    
     }//GEN-LAST:event_lbLocal2_4MouseClicked
 
     private void lbLocal2_5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal2_5MouseClicked
-        lbLocal2_5.setText("" + alteraPorta(Integer.parseInt(lbLocal2_5.getText())));
+        clickLabel(evt);    
     }//GEN-LAST:event_lbLocal2_5MouseClicked
 
     private void lbLocal2_6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal2_6MouseClicked
-        lbLocal2_6.setText("" + alteraPorta(Integer.parseInt(lbLocal2_6.getText())));
+        clickLabel(evt);    
     }//GEN-LAST:event_lbLocal2_6MouseClicked
 
     private void lbLocal2_7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal2_7MouseClicked
-        lbLocal2_7.setText("" + alteraPorta(Integer.parseInt(lbLocal2_7.getText())));
+        clickLabel(evt);    
     }//GEN-LAST:event_lbLocal2_7MouseClicked
 
     private void lbLocal2_8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal2_8MouseClicked
-        lbLocal2_8.setText("" + alteraPorta(Integer.parseInt(lbLocal2_8.getText())));
+        clickLabel(evt);    
     }//GEN-LAST:event_lbLocal2_8MouseClicked
 
     private void lbLocal2_9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal2_9MouseClicked
-        lbLocal2_9.setText("" + alteraPorta(Integer.parseInt(lbLocal2_9.getText())));
+       clickLabel(evt);    
     }//GEN-LAST:event_lbLocal2_9MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1333,6 +1424,18 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void clickLabel(java.awt.event.MouseEvent evt) {
+        JLabel labelAux = (JLabel)evt.getComponent();
+        if ((evt.getModifiers() & MouseEvent.BUTTON3_MASK) != 0) {
+            FrmOpComandos formAlteraComando = new FrmOpComandos(new javax.swing.JFrame(), true, (JLabel)evt.getComponent(), listaComandos);
+            formAlteraComando.setVisible(true);
+            labelAux = formAlteraComando.getLabel();
+            listaComandos = formAlteraComando.getLista();
+        } else {
+            labelAux.setText("" + (labelAux.getText().equals("6") ? "1" : Integer.parseInt(labelAux.getText()) + 1));
+        }
+    }
+    
     private void btnLimparSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparSaidaActionPerformed
         ptxtSaida.setText("");
     }//GEN-LAST:event_btnLimparSaidaActionPerformed
@@ -1427,6 +1530,82 @@ public class FrmEditorComandos extends javax.swing.JFrame {
         salva(true);
     }//GEN-LAST:event_salvarComoActionPerformed
 
+    private void lblTimmerTonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTimmerTonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblTimmerTonMouseClicked
+
+    private void lblTimmerTonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTimmerTonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblTimmerTonMousePressed
+
+    private void lbLocal3_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal3_2MouseClicked
+        clickLabel(evt);    
+    }//GEN-LAST:event_lbLocal3_2MouseClicked
+
+    private void lbLocal3_3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal3_3MouseClicked
+        clickLabel(evt);    
+    }//GEN-LAST:event_lbLocal3_3MouseClicked
+
+    private void lbLocal3_4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal3_4MouseClicked
+        clickLabel(evt);    
+    }//GEN-LAST:event_lbLocal3_4MouseClicked
+
+    private void lbLocal3_5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal3_5MouseClicked
+        clickLabel(evt);    
+    }//GEN-LAST:event_lbLocal3_5MouseClicked
+
+    private void lbLocal3_6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal3_6MouseClicked
+       clickLabel(evt);    
+    }//GEN-LAST:event_lbLocal3_6MouseClicked
+
+    private void lbLocal3_7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal3_7MouseClicked
+        clickLabel(evt);    
+    }//GEN-LAST:event_lbLocal3_7MouseClicked
+
+    private void lbLocal3_8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal3_8MouseClicked
+        clickLabel(evt);    
+    }//GEN-LAST:event_lbLocal3_8MouseClicked
+
+    private void lbLocal3_9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal3_9MouseClicked
+        clickLabel(evt);    
+    }//GEN-LAST:event_lbLocal3_9MouseClicked
+
+    private void lbLocal4_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal4_2MouseClicked
+       clickLabel(evt);    
+    }//GEN-LAST:event_lbLocal4_2MouseClicked
+
+    private void lbLocal4_3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal4_3MouseClicked
+        clickLabel(evt);    
+    }//GEN-LAST:event_lbLocal4_3MouseClicked
+
+    private void lbLocal4_4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal4_4MouseClicked
+        clickLabel(evt);    
+    }//GEN-LAST:event_lbLocal4_4MouseClicked
+
+    private void lbLocal4_5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal4_5MouseClicked
+        clickLabel(evt);    
+    }//GEN-LAST:event_lbLocal4_5MouseClicked
+
+    private void lbLocal4_6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal4_6MouseClicked
+       clickLabel(evt);    
+    }//GEN-LAST:event_lbLocal4_6MouseClicked
+
+    private void lbLocal4_7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal4_7MouseClicked
+        clickLabel(evt);
+    }//GEN-LAST:event_lbLocal4_7MouseClicked
+
+    private void lbLocal5_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLocal5_2MouseClicked
+        clickLabel(evt);    
+    }//GEN-LAST:event_lbLocal5_2MouseClicked
+
+    private void btnConfiguracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguracaoActionPerformed
+        JOptionPane.showMessageDialog(null, "Ops... Recurso ainda não implementado! Aguarde novas atualizações.");
+    }//GEN-LAST:event_btnConfiguracaoActionPerformed
+
+    private void btnVerificaConexaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificaConexaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerificaConexaoActionPerformed
+
     private int alteraPorta(int atual) {
         int porta;
         if (atual < 6) {
@@ -1448,7 +1627,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
 
         labelLine = labelLineAux;
 
-        JLabel[] labelContatosAux = {lblContatoNA, lblContatoNF, lblContatoP, lblContatoN, lblSaidaNA, lblSaidaNF, lblSaidaP, lblSaidaN
+        JLabel[] labelContatosAux = {lblContatoNA, lblContatoNF, lblContatoP, lblContatoN, lblSaidaNA, lblSaidaNF, lblSaidaP, lblSaidaN, lblTimmerTon
         };
         labelContatos = labelContatosAux;
 
@@ -1659,6 +1838,7 @@ public class FrmEditorComandos extends javax.swing.JFrame {
     private javax.swing.JLabel lblSaidaNA;
     private javax.swing.JLabel lblSaidaNF;
     private javax.swing.JLabel lblSaidaP;
+    private javax.swing.JLabel lblTimmerTon;
     private javax.swing.JTextPane ptxtSaida;
     private javax.swing.JButton salvarComo;
     // End of variables declaration//GEN-END:variables

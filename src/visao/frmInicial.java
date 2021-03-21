@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -31,6 +32,8 @@ public class frmInicial extends javax.swing.JFrame {
     public frmInicial() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        this.setIconImage(new ImageIcon(getClass().getResource("/icones/LogoVGS_icon.png")).getImage());
         // verifica
     }
 
@@ -45,7 +48,6 @@ public class frmInicial extends javax.swing.JFrame {
 
         brnNovoProjeto = new javax.swing.JButton();
         btnAbrirProjeto = new javax.swing.JButton();
-        btnSimulador = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -53,7 +55,8 @@ public class frmInicial extends javax.swing.JFrame {
         btnVerificarClp = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(getIconImage());
 
         brnNovoProjeto.setText("Novo Projeto");
         brnNovoProjeto.addActionListener(new java.awt.event.ActionListener() {
@@ -66,13 +69,6 @@ public class frmInicial extends javax.swing.JFrame {
         btnAbrirProjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAbrirProjetoActionPerformed(evt);
-            }
-        });
-
-        btnSimulador.setText("Simulador Ladder");
-        btnSimulador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSimuladorActionPerformed(evt);
             }
         });
 
@@ -104,11 +100,10 @@ public class frmInicial extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSimulador, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(brnNovoProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAbrirProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnVerificarClp, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                            .addComponent(btnVerificarClp, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(brnNovoProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -132,17 +127,17 @@ public class frmInicial extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(lblTitulo))
-                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(brnNovoProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(brnNovoProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAbrirProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAbrirProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSimulador, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnVerificarClp, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnVerificarClp, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addContainerGap())
@@ -190,10 +185,6 @@ public class frmInicial extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAbrirProjetoActionPerformed
 
-    private void btnSimuladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimuladorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSimuladorActionPerformed
-
     private void btnVerificarClpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarClpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVerificarClpActionPerformed
@@ -236,7 +227,6 @@ public class frmInicial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton brnNovoProjeto;
     private javax.swing.JButton btnAbrirProjeto;
-    private javax.swing.JButton btnSimulador;
     private javax.swing.JButton btnVerificarClp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

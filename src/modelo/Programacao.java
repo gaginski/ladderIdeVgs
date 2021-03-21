@@ -16,11 +16,13 @@ public class Programacao {
     public JSONObject status;
     public JSONObject parametros;
     public String[] pacotes;
+    public String progNewFormat;
      
-    public Programacao(JSONObject status, JSONObject parametros, String[] pacotes) {
+    public Programacao(JSONObject status, JSONObject parametros, String[] pacotes, String progNewFormat) {
         this.status = status;
         this.parametros = parametros;
         this.pacotes = pacotes;
+        this.progNewFormat = progNewFormat;
 
     }
 
@@ -28,6 +30,7 @@ public class Programacao {
         this.status = null;
         this.parametros = null;
         this.pacotes = null;
+        progNewFormat = null;
 
     }
 
@@ -54,4 +57,10 @@ public class Programacao {
     public void setParametros(JSONObject parametros) {
         this.parametros = parametros;
     }
+    public String getProgNewFormat() {
+        return progNewFormat;
+    }    
+    public void setProgNewFormat(String progNewFormat) {
+       this.progNewFormat = progNewFormat;
+    }    
 }

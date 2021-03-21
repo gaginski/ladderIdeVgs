@@ -46,7 +46,15 @@ public class ControleComunicacao {
         Configuracoes conf;
 
         prog.status = contPro.iniciaProg();
-
+        
+        /*retirar daqui*/
+        
+        prog = contPro.organizaComandosEnvio(linhas, colunas, lComandos, lLinhas);
+        prog = contPro.organizaPacotes(prog);
+        System.out.println("Organizado Json Programação e preparado pacotes para o envio");
+        JOptionPane.showMessageDialog(null,prog.progNewFormat);
+        
+        /*até*/
         conf = config.configuracao();
         System.out.println("Leitura do aquivo de configuração, porta" + conf.getPorta() + " configurada");
 

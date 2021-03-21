@@ -39,12 +39,8 @@ public class ControleProgramacao {
     public Programacao organizaComandosEnvio(int linhas, int colunas, JLabel[] lComandos, JLabel[][] lLinhas) throws JSONException, IOException, UnknownHostException, FileNotFoundException, ParseException {
         // declara variveis 
         int[][][] matrizComandos = new int[linhas][colunas][5];
-        JSONObject jsonEntrada = new JSONObject();
-        JSONObject jsonSaida = new JSONObject();
-        JSONObject jsonAux = new JSONObject();
-        JSONObject jsonComandos = new JSONObject();
-        String entradas = "";
-        String saidas = "";
+        JSONObject jsonEntrada = new JSONObject(), jsonComandos = new JSONObject(), jsonSaida = new JSONObject(), jsonAux = new JSONObject();
+        String entradas = null, saidas = null, progNewFormat = "";
 
         // captura status no objeto prog
         
@@ -72,6 +68,7 @@ public class ControleProgramacao {
             stringComandos = stringComandos + ("Linha_" + i + ": {");
             entradas = "\n   Entrada{ ";
             saidas = "\n   Saídas{ ";
+            progNewFormat = progNewFormat.concat("L"+(i+1)+"-");
             for (int c = 0; c < colunas; c++) {
                 if (matrizComandos[i][c][0] == 1) {
 
@@ -84,6 +81,7 @@ public class ControleProgramacao {
                             entradas = entradas + "\n       Comando:" + matrizComandos[i][c][3]
                                     + ", Porta:" + matrizComandos[i][c][4];
                             contE++;
+                            progNewFormat = progNewFormat.concat("I"+matrizComandos[i][c][3]+"P"+matrizComandos[i][c][4]+"-");
                             break;
                         case (4):
                         case (5):
@@ -92,13 +90,15 @@ public class ControleProgramacao {
                             jsonSaida.put("Cm" + contS, matrizComandos[i][c][3] + ", " + matrizComandos[i][c][4]);
                             saidas = saidas + "\n       Comando:" + matrizComandos[i][c][3]
                                     + ", Porta:" + matrizComandos[i][c][4];
+                            progNewFormat = progNewFormat.concat("O"+matrizComandos[i][c][3]+"P"+matrizComandos[i][c][4]+"-");
                             contS++;
                             break;
                         default:
                             break;
-
                     }
 
+                } else{
+                    progNewFormat = progNewFormat.concat("0-");
                 }
             }
             entradas = entradas + "}";
@@ -114,6 +114,7 @@ public class ControleProgramacao {
         }
 
         prog.parametros = jsonComandos;
+        prog.progNewFormat = progNewFormat;
 
         return prog;
     }
@@ -121,9 +122,9 @@ public class ControleProgramacao {
     public Programacao organizaPacotes(Programacao p) {
 
         String aux = null;
-        int cont, tamanhoVetor = p.parametros.toString().length();
+        int cont, tamanhoVetor = p.progNewFormat.length();
 
-        aux = p.parametros.toString();
+        aux = p.progNewFormat;
 
         cont = (int) Math.floor(tamanhoVetor / 240) + 1;
 

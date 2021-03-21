@@ -81,35 +81,38 @@
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblContatoNA" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="lblContatoNF" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="lblContatoP" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="lblContatoN" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblSaidaNA" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="lblSaidaNF" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="lblSaidaP" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="lblSaidaN" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="75" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel3" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblTimmerTon" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblContatoNA" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="lblContatoNF" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="lblContatoP" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="lblContatoN" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblSaidaNA" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="lblSaidaNF" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="lblSaidaP" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="lblSaidaN" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="75" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -125,7 +128,7 @@
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="lblSaidaN" min="-2" pref="32" max="-2" attributes="0"/>
@@ -148,6 +151,8 @@
                               </Group>
                           </Group>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lblTimmerTon" min="-2" pref="32" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -247,6 +252,9 @@
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerificaConexaoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnConfiguracao">
           <Properties>
@@ -260,6 +268,9 @@
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfiguracaoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCarregar">
           <Properties>
@@ -475,7 +486,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="18" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lbLocal1_1" min="-2" max="-2" attributes="0"/>
@@ -717,6 +728,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal3_5MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbLocal3_6">
           <Properties>
@@ -730,6 +744,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal3_6MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbLocal3_7">
           <Properties>
@@ -743,6 +760,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal3_7MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbLocal3_8">
           <Properties>
@@ -756,6 +776,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal3_8MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbLocal3_9">
           <Properties>
@@ -769,6 +792,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal3_9MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbLocal4_1">
           <Properties>
@@ -799,6 +825,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal4_2MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbLocal4_3">
           <Properties>
@@ -812,6 +841,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal4_3MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbLocal4_4">
           <Properties>
@@ -825,6 +857,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal4_4MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbLocal4_5">
           <Properties>
@@ -838,6 +873,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal4_5MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbLocal4_6">
           <Properties>
@@ -851,6 +889,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal4_6MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbLocal4_7">
           <Properties>
@@ -864,6 +905,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal4_7MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbLocal4_8">
           <Properties>
@@ -933,6 +977,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal5_2MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbLocal5_3">
           <Properties>
@@ -1455,6 +1502,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal3_2MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbLocal3_3">
           <Properties>
@@ -1468,6 +1518,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal3_3MouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbLocal3_4">
           <Properties>
@@ -1481,6 +1534,9 @@
               <ComponentRef name="Form"/>
             </Property>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLocal3_4MouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1539,5 +1595,16 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="lblTimmerTon">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icones/timmerTON.png"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblTimmerTonMouseClicked"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblTimmerTonMousePressed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

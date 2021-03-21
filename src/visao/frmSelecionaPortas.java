@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.json.JSONException;
 import org.json.simple.parser.ParseException;
@@ -30,7 +31,7 @@ public class frmSelecionaPortas extends javax.swing.JFrame {
     public frmSelecionaPortas() {
         initComponents();
       
-
+        this.setIconImage(new ImageIcon(getClass().getResource("/icones/LogoVGS_icon.png")).getImage());
         setLocationRelativeTo(null);
 
         btnSalvar.setMnemonic(KeyEvent.VK_S);
